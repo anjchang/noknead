@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>No-Knead Bread (Taper #9)</title>
+
+<!-- “No Knead Bread” Copyright (C) 2022 Angela Chang
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright 
+notice and this notice are preserved. This file is offered as-is,
+without any warranty.
+
+This is from Taper #9: Nine Lives, Fall 2022:
+
+https://taper.badquar.to/9/no_knead.html
+
+In the right environment and with just a little agitation, a mess of
+essential ingredients transform into a pliable mass capable of becoming
+bread. It surprises me that from such simple ingredients, a complex
+network (or crumb) develops unique textures, tastes, and shapes.  At
+what moment do these ingredients become dough? 
+
+This poem also alludes to the workings of proximity and time in helping
+us forge relationships with our closest companions. Each relationship
+might have started due to serendipitous situations we may have no
+control over. 
+
+All elements begin scattered and separated, like ground-up granules of
+flour, salt, and yeast. Water enables the particles to bind together to
+join gluten. Through computer agitation, connections form that
+strengthen somehow to Become Something Consistent and Substantial--
+dough. By traversing the literary paths that arise from these
+increasing bonds, increasing closeness and connection result in lasting
+friendships, togetherness, and happy memories.
+
+Note: The linking threads that bind the verses are colored  “wheat”
+or #F5DEB3 (the raw substance that is ground into flour for bread).
+Wheat is also a nod to our ancestral lineage, our genetic structure.
+The text colors are chosen according to the structure of my
+own “dough.” 
+	Peru= Where my father was born, and some extended family lives. 
+	Chocolate = A gift from the Incas, who lived in Peru.
+Chocolate was used in special celebrations. 
+	Sienna = A reference to earth, a homage to the geographic locations
+where we find ourselves seeking outfriends to form social bonds.
+
+Note2: The original No-Knead Bread recipe 
+	https://cooking.nytimes.com/recipes/11376-no-knead-bread
+	but my favorite is Kenji's recipe
+	https://cooking.nytimes.com/recipes/1022147-updated-no-knead-bread
+-->
+
+	<style>
+	body { margin:0 ; overflow:hidden }
+	a { color:#eee ; text-decoration:none }
+	header { margin:0 ; padding:0 ; background-color:#444 ; color:#bbb ;
+		position:relative ; z-index:1000 }
+	header > h1 { margin:0 ; font-size:12px ; font-family:sans-serif ;
+		border-bottom:1px #999 solid ; padding:5px 10px ; line-height:17px }
+</style>
+</head>
+<body>
+<header id=nav>
+	<h1>
+		<a href="index.html">Taper #9 :
+		Nine Lives</a> : Fall 2022 <br>
+		<a href="no_knead.html">No Knead</a> by
+		<a href="about.html#chang">Angela Chang</a> :
+		<a href="prev.html">&lt;&lt;</a> &mdash;
+		<a href="next.html">&gt;&gt;</a>
+	</h1>
+</header> <!-- All poem code goes here, and must be less than or equal to 2048 bytes (not including closing </body> and </html> tags below)-->
+<canvas id="c" style="z-index: 2"/></canvas>
+<canvas id="b" style="z-index: 1"/></canvas>
+<script>s=t=>document.getElementById(t)
+p="proving dough0kneading love0pleasing choux0teasing you0syncopate0breathy space0steam inside0start a rise0tender rhymes0autolyze0give it time0bubbling high0sweet soul-fle0don't deflate0dedicate",l=p.split(0).sort(()=>.5-Math.random()).slice(1,10);o=[];
+col="chocolate0peru0sienna".split(0)
+c1=s('c');c1.width=window.innerWidth;c1.height=window.innerHeight;
+c2=s("b");c2.width=window.innerWidth;c2.height=window.innerHeight;
+ctx=c1.getContext("2d");ctx2=c2.getContext("2d");
+w=c1.width;h=c1.height;r=40;
+Word = function(key,x,y,ind){ 	
+	this.x=x;this.y=y;this.txt=key;
+	if(ind==0){this.finx=w/2;this.finy=h/2.0}
+	else{this.finx=w/2+160*Math.cos(ind*0.78)
+	this.finy=h/2+140*Math.sin(ind*0.78)}}
+for (i = 0;i < l.length; ++i){
+	x=Math.random()*w;y=Math.random()*h;
+	o.push(new Word(l[i],x,y,i))}
+function drawCircle(x,y,txt){
+	ctx=c1.getContext('2d');
+	ctx.beginPath();
+	ctx.arc(x, y, 120, 0, Math.PI * 2, false);
+	ctx.fillStyle = "rgba(254,254,254,0.1)";
+	ctx.fill();ctx.closePath();
+	ctx=c1.getContext('2d');
+	ctx.fillStyle= col[i%3];
+	ctx.font='20px sans';ctx.textAlign='center';
+	ctx.fillText(txt,x,y)}
+function init(o={}){
+	for (var i=0;i<o.length;i++){
+	circ=o[i];
+	drawCircle(circ.x,circ.y,circ.txt)}}
+	init(o);
+function dist(x1,y1,x2,y2){
+	dx = x2-x1;dy = y2-y1;
+	return(Math.sqrt(dx*dx+dy*dy))}
+function anim(){
+	crumb()
+	for (i=0;i<o.length;i++){
+	circ=o[i];
+	dx = circ.finx-circ.x;
+    dy = h-circ.finy-circ.y;
+	drawCircle(circ.x=circ.x+dx*0.012,circ.y=circ.y+dy*0.012,circ.txt)}}
+function crumb(){
+	for (i=0;i<o.length-1;i++){
+		a=o[i]
+		for ( j=i+1;j<o.length;j++){
+		b=o[j];
+		dis= dist(a.x,a.y,b.x,b.y)
+ctx.strokeStyle='#'+(parseInt(Math.random()+0xF5DEB3)).toString(16);
+ctx.beginPath();ctx.lineCap="round";
+dis>200?lw=100/dis:lw=200-.5*dis
+ctx.lineWidth=ctx.lineWidth=lw
+ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}
+setInterval(function(){anim()},120);
+</script>
+</body>
+</html>
