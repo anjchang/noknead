@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>No-Knead Bread (Taper #9)</title>
+
+<!-- “No Knead Bread” Copyright (C) 2022 Angela Chang
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright 
+notice and this notice are preserved. This file is offered as-is,
+without any warranty.
+
+This is from Taper #9: Nine Lives, Fall 2022:
+
+https://taper.badquar.to/9/no_knead.html
+
+Each time I make no-knead bread, it never comes out exactly the same.
+Despite having consistent ingredients, the inner structure (or crumb)
+created by the complex combination of factors is always a surprise.
+Different factors such asyeast strength, the baker's effort, ambient
+humidity, kneading time, proofing time, baking temperature, baking time
+alter the final product. This poem is also an ode to the special
+relationships we have with our closest people. Each link is different
+and arises out of forces we may have no direct control over.
+Follow the multilinear phrases to strengthen and celebrate those 
+rare connections.
+-->
+
+	<style>
+	body { margin:0 ; overflow:hidden }
+	a { color:#eee ; text-decoration:none }
+	header { margin:0 ; padding:0 ; background-color:#444 ; color:#bbb ;
+		position:relative ; z-index:1000 }
+	header > h1 { margin:0 ; font-size:12px ; font-family:sans-serif ;
+		border-bottom:1px #999 solid ; padding:5px 10px ; line-height:17px }
+</style>
+</head>
+<body>
+<header id=nav>
+	<h1>
+		<a href="index.html">Taper #9 :
+		Nine Lives</a> : Fall 2022 <br>
+		<a href="no_knead.html">No Knead</a> by
+		<a href="about.html#chang">Angela Chang</a> :
+		<a href="prev.html">&lt;&lt;</a> &mdash;
+		<a href="next.html">&gt;&gt;</a>
+	</h1>
+</header> <!-- All poem code goes here, and must be less than or equal to 2048 bytes (not including closing </body> and </html> tags below)-->
+<body>
+<canvas id="c" style="z-index: 2"/></canvas>
+<canvas id="b" style="z-index: 1"/></canvas>
+<script>
+s=t=>document.getElementById(t);
+var p="i play though0kneading love0please choux0teasing you0syncopate0breathy space0steam inside0start a rise0giving time0been living high0sweet soul-fle0good ol' rhymes",l=p.split(0).sort(()=>.5-Math.random()).slice(1,10);o = [];
+var c1=s('c');c1.width = window.innerWidth;
+	c1.height = window.innerHeight;
+var c2 = s("b");c2.width = window.innerWidth;c2.height = window.innerHeight;
+ctx=c1.getContext("2d");ctx2 = c2.getContext("2d");
+w = c1.width; h = c1.height;r = 40;
+Word = function(key,xpos,ypos,ind){ 	
+	this.x=x;this.y=y;this.text=key;
+  	this.finx= w/4 + 130 * (ind%3)+5*Math.cos(ind*3.2);
+  	this.finy= h-100- 90 * parseInt(ind/3)+40*Math.sin(ind*3.2)}
+for (i = 0;i < l.length; ++i) {
+	x =Math.random()*w;y= Math.random()* h;
+	o.push( new Word(l[i],x,y,i))}
+function drawCircle(x,y,txt){
+	ctx=c1.getContext('2d');
+	ctx.beginPath();
+	ctx.arc(x, y, 120, 0, Math.PI * 2, false);
+	ctx.fillStyle = "rgba(255,255,255,0.1)";
+	ctx.closePath();
+	ctx.fill();
+	ctx=c1.getContext('2d');
+	ctx.fillStyle = 'black';
+	ctx.font = '20px sans';
+	ctx.textAlign  = 'center';
+	ctx.fillText(txt, x, y)}
+function init(o={}){
+	for (var i=0;i<o.length;i++){
+		circ=o[i];
+		drawCircle(circ.x,circ.y,circ.text)}}
+init(o);
+function dist(x1,y1,x2,y2){
+	dx = x2-x1;dy = y2-y1;
+	return(Math.sqrt(dx*dx+dy*dy));}
+function anim(){
+	crumb();
+	for (i=0;i<o.length;i++){
+	circ=o[i];
+	dx = circ.finx-circ.x;
+    dy = h-circ.finy-circ.y;
+	drawCircle(circ.x=circ.x+dx*0.012,circ.y=circ.y+dy*0.012,circ.text)}}
+function crumb(){
+	for (i=0;i<o.length-1;i++){
+		a=o[i]
+		for ( j=i+1;j<o.length;j++){
+			 b=o[j];
+			dis = dist(a.x,a.y,b.x,b.y)
+			if(dis<224){
+ctx.strokeStyle="#"+((1<<24)*Math.random()|0).toString(16);
+ctx.beginPath();
+ctx.lineWidth = 1.0 - dist / 3;
+ctx.moveTo(a.x, a.y);
+ctx.lineTo(b.x, b.y);
+ctx.stroke()}}}}
+setInterval(function(){anim()},50);
+</script>
+</body>
+</html>
